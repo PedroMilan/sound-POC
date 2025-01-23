@@ -1,10 +1,23 @@
 import React from "react";
-import { useWithSound } from "./useWithSound";
+import { Howl } from "howler";
 import "./App.css";
 
 const App: React.FC = () => {
-  const leftSound = useWithSound("/audio/snap-sound.mp3", -1);
-  const rightSound = useWithSound("/audio/snap-sound.mp3", 1);
+  const playLeft = () => {
+    const sound = new Howl({
+      src: ["/audio/snap-sound.mp3"],
+    });
+    sound.pos(-1, 0, 0);
+    sound.play();
+  };
+
+  const playRight = () => {
+    const sound = new Howl({
+      src: ["/audio/snap-sound.mp3"],
+    });
+    sound.pos(1, 0, 0);
+    sound.play();
+  };
 
   return (
     <div className="App">
@@ -18,16 +31,10 @@ const App: React.FC = () => {
             gap: "25px",
           }}
         >
-          <button
-            onClick={leftSound.playSound}
-            style={{ padding: "12px 10px" }}
-          >
+          <button onClick={playLeft} style={{ padding: "12px 10px" }}>
             Som Esquerdo
           </button>
-          <button
-            onClick={rightSound.playSound}
-            style={{ padding: "12px 10px" }}
-          >
+          <button onClick={playRight} style={{ padding: "12px 10px" }}>
             Som Direito
           </button>
         </div>
